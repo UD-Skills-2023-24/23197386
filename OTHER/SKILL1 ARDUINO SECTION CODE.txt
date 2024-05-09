@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv("E:\桌面\SPEED SECTION.csv")
+
+x = data.iloc[:, 0]  
+y = data.iloc[:, 1] 
+
+
+norm = plt.Normalize(y.min(), y.max())
+colors = plt.cm.jet(norm(y))
+
+
+plt.figure(figsize=(16, 3), dpi=100)  # 设置DPI
+
+
+plt.plot(x, y, color='black') 
+
+for i in range(len(x)):
+    plt.plot([x[i], x[i]], [0, y[i]], color=colors[i], linestyle='--', linewidth=0.5)
+
+plt.title('Line Chart with Values intersecting X-axis')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+
+plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap='jet'), label='Y Value')
+
+plt.show()
